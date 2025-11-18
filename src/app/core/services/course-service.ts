@@ -8,7 +8,57 @@ export class CourseService {
 
   private readonly _planning = 
   
-  `14-11-25;vendredi;
+  `25-09-25;jeudi;
+26-09-25;vendredi;
+27-09-25;samedi;
+28-09-25;dimanche;
+29-09-25;lundi;
+30-09-25;mardi;
+01-10-25;mercredi;
+02-10-25;jeudi;
+03-10-25;vendredi;
+04-10-25;samedi;
+05-10-25;dimanche;
+06-10-25;lundi;
+07-10-25;mardi;
+08-10-25;mercredi;
+09-10-25;jeudi;
+10-10-25;vendredi;
+11-10-25;samedi;
+12-10-25;dimanche;
+13-10-25;lundi;
+14-10-25;mardi;
+15-10-25;mercredi;
+16-10-25;jeudi;
+17-10-25;vendredi;
+18-10-25;samedi;
+19-10-25;dimanche;
+20-10-25;lundi;
+21-10-25;mardi;
+22-10-25;mercredi;
+23-10-25;jeudi;
+24-10-25;vendredi;
+25-10-25;samedi;
+26-10-25;dimanche;
+27-10-25;lundi;
+28-10-25;mardi;
+29-10-25;mercredi;
+30-10-25;jeudi;
+31-10-25;vendredi;
+01-11-25;samedi;
+02-11-25;dimanche;
+03-11-25;lundi;Web Statique;1/203
+04-11-25;mardi;
+05-11-25;mercredi;
+06-11-25;jeudi;
+07-11-25;vendredi;
+08-11-25;samedi;
+09-11-25;dimanche;
+10-11-25;lundi;Web Statique;1/203
+11-11-25;mardi;
+12-11-25;mercredi;
+13-11-25;jeudi;Web Statique;1/203
+14-11-25;vendredi;
 15-11-25;samedi;
 16-11-25;dimanche;
 17-11-25;lundi;Web Statique;1/203
@@ -238,10 +288,10 @@ export class CourseService {
 29-06-26;lundi;
 30-06-26;mardi;`.trim(); 
 
-  //on prend le string _planning et on le découpe en lignes
+  //je prends le string _planning et je le découpe en lignes
   calendar = this._planning.split(/\r?\n/); // regex
   
-  //pour chaque ligne, on utilise split(';') pour découper en colonnes
+  //pour chaque ligne, j'utilise split(';') pour découper en colonnes
   parseLines(): string[][] {
   return this.calendar.map(line => line.split(';'));
 }
@@ -257,7 +307,8 @@ mapToCourse(cols: string[], index: number): Course {
     id: index,
     name: name,
     local: local,
-    date
+    date,
+    present: false,
   };
   
 }
@@ -288,16 +339,20 @@ setPresence(courseId: number, present: boolean) {
   localStorage.setItem('courses', JSON.stringify(courses));
 }
 
-attendanceCourseRate(courseName:string): number {
+attendanceCourseRate(courseName: string): number {
   const today = new Date();
   const courses = this.getCourses();
-  const course = courses.filter(c => c.name == courseName && c.date <= today);
-  if (!course.length) return 0;
 
-  const presentCount = course.filter(c => c.present).length;
-  return (presentCount / course.length) * 100;
+  //transformer les dates des cours en objets Date
+  const filtered = courses.filter(c => {
+    const courseDate = new Date(c.date); //je reconstruis la date
+    return c.name === courseName && courseDate <= today;
+  });
 
+  if (!filtered.length) return 0;
 
+  const presentCount = filtered.filter(c => c.present).length;
+  return (presentCount / filtered.length) * 100;
 }
 
   

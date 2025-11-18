@@ -1,4 +1,4 @@
-import { Component, inject, OnInit } from '@angular/core';
+import { Component, inject, Input, OnInit } from '@angular/core';
 import { CourseService } from '../../core/services/course-service';
 import { Course } from '../../core/models/course.model';
 import { FormsModule} from '@angular/forms';
@@ -10,15 +10,12 @@ import { CommonModule } from '@angular/common';
   templateUrl: './course-grid.html',
   styleUrl: './course-grid.scss',
 })
-export class CourseGrid implements OnInit {
+export class CourseGrid {
 
   private readonly _courseService = inject(CourseService)
 
-  courses: Course[] = [];
-
-   ngOnInit() {
-    this.courses = this._courseService.getCourses();
-  }
+  @Input() courses: Course[] = [];
+  today = new Date();
 
   togglePresence(course: Course) {
     course.present = !course.present;

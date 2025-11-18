@@ -1,5 +1,7 @@
 import { Routes } from '@angular/router';
 import { CourseGrid } from './components/course-grid/course-grid';
+import { CoursesPage } from './pages/courses-page/courses-page';
+import { AttendancesPage } from './pages/attendances-page/attendances-page/attendances-page';
 
 export const routes: Routes = [
 
@@ -9,6 +11,11 @@ export const routes: Routes = [
     
     {
         path: 'courses',
-        component: CourseGrid
+        component: CoursesPage
+    },
+
+    {
+        path: 'attendance',
+        component: AttendancesPage
     }
 ];

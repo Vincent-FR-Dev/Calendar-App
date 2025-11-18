@@ -1,1 +1,16 @@
-<app-course-grid #courseGrid></app-course-grid>
+<div class="page-container">
+
+  <div class="page-header">
+    <button class="btn-primary" (click)="goToTodayCourse()">Cours du jour</button>
+    <button class="btn-secondary" routerLink="/attendance">Voir présence</button>
+  </div>
+
+  @if (noCourseToday()) {
+    <p class="no-course-message">
+      🚫 Aucun cours aujourd'hui !
+    </p>
+  }
+
+  <app-course-grid [courses]="courses()"></app-course-grid>
+
+</div>

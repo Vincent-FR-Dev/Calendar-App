@@ -1,24 +1,48 @@
-<table>
-  <thead>
-    <tr>
-      <th>Date</th>
-      <th>Nom du cours</th>
-      <th>Local</th>
-      <th>Présence</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr *ngFor="let course of courses">
-      <td>{{ course.date | date:'shortDate' }}</td>
-      <td>{{ course.name }}</td>
-      <td>{{ course.local }}</td>
-      <td>
-        <input type="checkbox" [(ngModel)]="course.present" (change)="togglePresence(course)">
-      </td>
-    </tr>
-  </tbody>
-</table>
+<div class="course-grid-container">
 
-<div *ngFor="let name of ['Web Statique','UI/UX Design','Initiation Programmation']">
-  <p>{{ name }}: {{ getAttendance(name) | number:'1.0-0' }}%</p>
+  <table class="course-table">
+    <thead>
+      <tr>
+        <th>Date</th>
+        <th>Cours</th>
+        <th>Local</th>
+        <th>Présence</th>
+      </tr>
+    </thead>
+
+    <tbody>
+      @for (course of courses; track course.id) {
+        <tr 
+          [id]="'course-' + course.id"
+          [attr.data-date]="course.date | date:'yyyy-MM-dd'"
+          [class.today-highlight]="(course.date | date:'yyyy-MM-dd') === (today | date:'yyyy-MM-dd')"
+        >
+          <td class="date-cell">
+            <div class="date-box">
+              <span class="day">{{ course.date | date:'dd' }}</span>
+              <span class="month">{{ course.date | date:'MMM' }}</span>
+            </div>
+          </td>
+
+          <td class="course-name">
+            <div class="name-box">
+              <span class="title">{{ course.name }}</span>
+            </div>
+          </td>
+
+          <td class="local">
+            <span class="local-tag">{{ course.local }}</span>
+          </td>
+
+          <td class="presence">
+            <label class="presence-toggle">
+              <input type="checkbox" [(ngModel)]="course.present" (click)="togglePresence(course)">
+              <span class="slider"></span>
+            </label>
+          </td>
+        </tr>
+      }
+    </tbody>
+  </table>
+
 </div>

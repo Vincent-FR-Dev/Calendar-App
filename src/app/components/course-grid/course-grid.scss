@@ -1,0 +1,127 @@
+.course-grid-container {
+  width: 100%;
+  overflow-x: auto;
+  margin-top: 1.5rem;
+}
+
+.course-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-family: Arial, sans-serif;
+}
+
+.course-table thead {
+  background: #f4f6f9;
+}
+
+.course-table th {
+  text-align: left;
+  padding: 12px;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #555;
+  border-bottom: 2px solid #e1e5ea;
+}
+
+.course-table tr {
+  transition: background 0.2s;
+}
+
+.course-table tbody tr:hover {
+  background: #f9fbfd;
+}
+
+.today-highlight {
+  background: #e9f3ff !important;
+  font-weight: bold;
+}
+
+.date-box {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #eef3ff;
+  padding: 6px 10px;
+  border-radius: 8px;
+  font-weight: bold;
+  width: 55px;
+}
+
+.date-box .day {
+  font-size: 1.1rem;
+  color: #2c3e50;
+}
+
+.date-box .month {
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #678;
+}
+
+.name-box .title {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: #333;
+}
+
+.local-tag {
+  padding: 5px 10px;
+  background: #f0f0f0;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  color: #444;
+}
+
+.presence-toggle {
+  position: relative;
+  display: inline-block;
+  width: 38px;
+  height: 20px;
+}
+
+.presence-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.presence-toggle .slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background-color: #ccc;
+  border-radius: 20px;
+  transition: 0.3s;
+}
+
+.presence-toggle .slider:before {
+  position: absolute;
+  content: "";
+  height: 16px; width: 16px;
+  left: 2px; bottom: 2px;
+  background-color: white;
+  border-radius: 50%;
+  transition: 0.3s;
+}
+
+.presence-toggle input:checked + .slider {
+  background-color: #4A90E2;
+}
+
+.presence-toggle input:checked + .slider:before {
+  transform: translateX(18px);
+}
+
+@media (max-width: 600px) {
+  .date-box {
+    padding: 4px 8px;
+  }
+
+  .local-tag {
+    font-size: 0.7rem;
+  }
+
+  .name-box .title {
+    font-size: 0.85rem;
+  }
+}

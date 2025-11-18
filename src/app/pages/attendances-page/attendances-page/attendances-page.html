@@ -1,0 +1,40 @@
+<div class="attendance-container">
+  <h1>Taux de présence par cours</h1>
+
+  <div class="page-header">
+    <button class="btn-primary" routerLink="/courses">← Retour aux cours</button>
+  </div>
+
+  <div class="charts-wrapper">
+
+    @for (name of courseNames; track $index; let i = $index) {
+      <div class="chart-box">
+        <h2>{{ name }}</h2>
+
+        <canvas baseChart
+                [datasets]="[{
+                  data: [attendanceRates[i], 100 - attendanceRates[i]],
+                  label: 'Présence (%)',
+                  backgroundColor: ['#4A90E2', '#F5A623']
+                }]"
+                [labels]="['Présent', 'Absent']"
+                [options]="pieChartOptions"
+                type="pie">
+        </canvas>
+      </div>
+    }
+
+  </div>
+
+  <div class="attendance-list">
+
+    @for (name of courseNames; track $index; let i = $index) {
+      <div class="attendance-item">
+        <span class="course-name">{{ name }}</span>
+        <span class="course-rate-value">{{ attendanceRates[i] }}%</span>
+      </div>
+    }
+
+  </div>
+
+</div>

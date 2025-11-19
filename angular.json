@@ -20,6 +20,8 @@
         "build": {
           "builder": "@angular/build:application",
           "options": {
+            "outputPath": "calendar-app/calendar-app",
+            "baseHref": "/calendar-app/",
             "browser": "src/main.ts",
             "polyfills": [
               "zone.js"
